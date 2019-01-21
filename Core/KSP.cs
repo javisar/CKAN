@@ -213,7 +213,7 @@ namespace CKAN
         /// </summary>
         internal static bool IsKspDir(string directory)
         {
-            return Directory.Exists(Path.Combine(directory, "GameData"));
+            return Directory.Exists(Path.Combine(directory, GameConfig.Constants.GameDir));
         }
 
 
@@ -260,7 +260,7 @@ namespace CKAN
         /// </summary>
         public void RebuildKSPSubDir()
         {
-            string[] FoldersToCheck = { "Ships/VAB", "Ships/SPH", "Ships/@thumbs/VAB", "Ships/@thumbs/SPH" };
+            string[] FoldersToCheck = GameConfig.Constants.FoldersToCheck ;
             foreach (string sRelativePath in FoldersToCheck)
             {
                 string sAbsolutePath = ToAbsoluteGameDir(sRelativePath);
@@ -281,7 +281,7 @@ namespace CKAN
         public string GameData()
         {
             return KSPPathUtils.NormalizePath(
-                Path.Combine(GameDir(), "GameData")
+                Path.Combine(GameDir(), GameConfig.Constants.ModsDir)
             );
         }
 

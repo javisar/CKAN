@@ -13,7 +13,7 @@ namespace CKAN.GameVersionProviders
     {
         // TODO: Need a way for the client to configure this
         private static readonly Uri BuildMapUri =
-            new Uri("https://raw.githubusercontent.com/KSP-CKAN/CKAN-meta/master/builds.json");
+            new Uri(GameConfig.Constants.BuildMapUri);
 
         private static readonly ILog Log = LogManager.GetLogger(typeof(KspBuildMap));
 
