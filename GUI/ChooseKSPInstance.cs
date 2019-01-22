@@ -15,7 +15,7 @@ namespace CKAN
             CheckFileExists = false,
             CheckPathExists = false,
             InitialDirectory = Environment.CurrentDirectory,
-            Filter = "Build metadata file (buildID*.txt)|buildID*.txt",
+            Filter = GameConfig.Constants.GameFileFilter,
             Multiselect = false
         };
 

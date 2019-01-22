@@ -81,6 +81,7 @@
     <Compile Include="Exporters\PlainTextExporter.cs" />
     <Compile Include="Extensions\EnumerableExtensions.cs" />
     <Compile Include="FileIdentifier.cs" />
+    <Compile Include="GameConfig\Constants.cs" />
     <Compile Include="GameVersionProviders\IGameVersionProvider.cs" />
     <Compile Include="GameVersionProviders\IKspBuildMap.cs" />
     <Compile Include="GameVersionProviders\KspBuildIdVersionProvider.cs" />
