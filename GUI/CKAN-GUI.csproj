@@ -34,7 +34,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;ONI</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
@@ -221,6 +221,7 @@
     <Compile Include="RenameInstanceDialog.Designer.cs">
       <DependentUpon>RenameInstanceDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="Settings.cs" />
     <Compile Include="SettingsDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -239,10 +240,10 @@
     </Compile>
     <Compile Include="TransparentTextBox.cs" />
     <Compile Include="SelectionDialog.cs">
-        <Subtype>Form</Subtype>
+      <Subtype>Form</Subtype>
     </Compile>
     <Compile Include="SelectionDialog.Designer.cs">
-        <DependentUpon>SelectionDialog.cs</DependentUpon>
+      <DependentUpon>SelectionDialog.cs</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -349,6 +350,7 @@
     <Content Include="Resources\filter.png" />
     <Content Include="Resources\forward.png" />
     <Content Include="Resources\ksp.png" />
+    <Content Include="Resources\oni.png" />
     <Content Include="Resources\refresh.png" />
     <Content Include="Resources\search.png" />
     <Content Include="Resources\settings.png" />

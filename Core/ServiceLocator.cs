@@ -39,7 +39,8 @@ namespace CKAN
             builder.RegisterType<Win32Registry>()
                 .As<IWin32Registry>();
 
-            builder.RegisterType<KspBuildMap>()
+#if (!ONI)
+			builder.RegisterType<KspBuildMap>()
                 .As<IKspBuildMap>()
                 .SingleInstance(); // Since it stores cached data we want to keep it around
 
@@ -50,8 +51,16 @@ namespace CKAN
             builder.RegisterType<KspReadmeVersionProvider>()
                 .As<IGameVersionProvider>()
                 .Keyed<IGameVersionProvider>(KspVersionSource.Readme);
+#else
+			builder.RegisterType<OniBuildMap>()
+                .As<IKspBuildMap>()
+                .SingleInstance(); // Since it stores cached data we want to keep it around
 
-            _container = builder.Build();
+            builder.RegisterType<OniBuildIdVersionProvider>()
+                .As<IGameVersionProvider>()
+                .Keyed<IGameVersionProvider>(KspVersionSource.BuildId);
+#endif
+			_container = builder.Build();
         }
     }
 }

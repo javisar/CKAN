@@ -401,7 +401,7 @@ namespace CKAN
                 UpdateRepo();
             }
 
-            Text = $"CKAN {Meta.GetVersion()} - KSP {CurrentInstance.Version()}  --  {CurrentInstance.GameDir()}";
+            Text = $"CKAN {Meta.GetVersion()} - {GameConfig.Constants.GameNameShort} {CurrentInstance.Version()}  --  {CurrentInstance.GameDir()}";
 
             if (commandLineArgs.Length >= 2)
             {

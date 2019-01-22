@@ -357,14 +357,18 @@
             this.menuStrip2.Size = new System.Drawing.Size(5876, 62);
             this.menuStrip2.TabIndex = 2;
             this.menuStrip2.Text = "menuStrip2";
-            // 
-            // launchKSPToolStripMenuItem
-            // 
-            this.launchKSPToolStripMenuItem.Image = global::CKAN.Properties.Resources.ksp;
-            this.launchKSPToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+			// 
+			// launchKSPToolStripMenuItem
+			// 
+#if (!ONI)
+			this.launchKSPToolStripMenuItem.Image = global::CKAN.Properties.Resources.ksp;
+#else
+			this.launchKSPToolStripMenuItem.Image = global::CKAN.Properties.Resources.oni;
+#endif
+			this.launchKSPToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.launchKSPToolStripMenuItem.Name = "launchKSPToolStripMenuItem";
             this.launchKSPToolStripMenuItem.Size = new System.Drawing.Size(146, 56);
-            this.launchKSPToolStripMenuItem.Text = "Launch KSP";
+            this.launchKSPToolStripMenuItem.Text = "Launch "+GameConfig.Constants.GameNameShort;
             this.launchKSPToolStripMenuItem.Click += new System.EventHandler(this.launchKSPToolStripMenuItem_Click);
             // 
             // RefreshToolButton
@@ -600,7 +604,7 @@
             // 
             // KSPCompatibility
             // 
-            this.KSPCompatibility.HeaderText = "Max KSP version";
+            this.KSPCompatibility.HeaderText = "Max " + GameConfig.Constants.GameNameShort + " version";
             this.KSPCompatibility.Name = "KSPCompatibility";
             this.KSPCompatibility.ReadOnly = true;
             this.KSPCompatibility.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
@@ -1288,7 +1292,7 @@
 
         }
 
-        #endregion
+#endregion
 
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;

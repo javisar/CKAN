@@ -18,7 +18,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;ONI</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
@@ -84,9 +84,12 @@
     <Compile Include="GameConfig\Constants.cs" />
     <Compile Include="GameVersionProviders\IGameVersionProvider.cs" />
     <Compile Include="GameVersionProviders\IKspBuildMap.cs" />
+    <Compile Include="GameVersionProviders\OniBuildIdVersionProvider.cs" />
     <Compile Include="GameVersionProviders\KspBuildIdVersionProvider.cs" />
+    <Compile Include="GameVersionProviders\OniBuildMap.cs" />
     <Compile Include="GameVersionProviders\KspBuildMap.cs" />
     <Compile Include="GameVersionProviders\KspReadmeVersionProvider.cs" />
+    <Compile Include="GameVersionProviders\OniVersionSource.cs" />
     <Compile Include="GameVersionProviders\KspVersionSource.cs" />
     <Compile Include="KSP.cs" />
     <Compile Include="KSPManager.cs" />
