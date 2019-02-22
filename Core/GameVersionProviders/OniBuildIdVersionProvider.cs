@@ -1,5 +1,7 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text.RegularExpressions;
 using CKAN.Versioning;
 using log4net;
@@ -24,8 +26,28 @@ namespace CKAN.GameVersionProviders
 
         public bool TryGetVersion(string directory, out KspVersion result)
         {
-			result = new KspVersion(0, 0, 303030);
-			return true;
+			//result = new KspVersion(0, 0, 303030);
+			//return true;
+			AppDomain dom = AppDomain.CreateDomain("FindONIVersion");
+			try
+			{				
+				AssemblyName assemblyName = new AssemblyName();
+				assemblyName.CodeBase = Path.Combine(directory, GameConfig.Constants.GameDir+"/Managed/Assembly-CSharp.dll");
+
+				Assembly loaded = Assembly.Load(assemblyName);
+				Type t = loaded.GetType("KleiVersion");
+				var fieldInfo = t.GetField("ChangeList");
+				uint version = (uint)fieldInfo.GetValue(null);
+				AppDomain.Unload(dom);
+				result = new KspVersion(0, Convert.ToInt32(version));
+				return true;
+			}
+			catch (Exception ex)
+			{
+				AppDomain.Unload(dom);
+				result = default(KspVersion);
+				return false;
+			}
 			/*
             KspVersion buildIdVersion;
             var hasBuildId = TryGetVersionFromFile(Path.Combine(directory, "buildID.txt"), out buildIdVersion);
