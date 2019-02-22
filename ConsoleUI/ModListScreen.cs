@@ -40,7 +40,7 @@ namespace CKAN.ConsoleUI {
                         Renderer = m => ModuleInstaller.StripEpoch(m.version?.ToString() ?? ""),
                         Comparer = (a, b) => a.version.CompareTo(b.version)
                     }, new ConsoleListBoxColumn<CkanModule>() {
-                        Header   = "Max KSP version",
+                        Header   = "Max "+GameConfig.Constants.GameNameShort+" version",
                         Width    = 17,
                         Renderer = m => registry.LatestCompatibleKSP(m.identifier)?.ToString() ?? "",
                         Comparer = (a, b) => registry.LatestCompatibleKSP(a.identifier).CompareTo(registry.LatestCompatibleKSP(b.identifier))
@@ -243,7 +243,7 @@ namespace CKAN.ConsoleUI {
                 new ConsoleMenuOption("Audit recommendations",      "",
                     "List mods suggested and recommended by installed mods",
                     true, ViewSuggestions),
-                new ConsoleMenuOption("Scan KSP dir",               "",
+                new ConsoleMenuOption("Scan "+GameConfig.Constants.GameNameShort+" dir",               "",
                     "Check for manually installed mods",
                     true, ScanForMods),
                 new ConsoleMenuOption("Import downloads...",        "",
@@ -253,7 +253,7 @@ namespace CKAN.ConsoleUI {
                     "Save your mod list",
                     true, ExportInstalled),
                 null,
-                new ConsoleMenuOption("Select KSP install...",      "",
+                new ConsoleMenuOption("Select "+GameConfig.Constants.GameNameShort+" install...",      "",
                     "Switch to a different game instance",
                     true, SelectInstall),
                 new ConsoleMenuOption("Authentication tokens...",     "",

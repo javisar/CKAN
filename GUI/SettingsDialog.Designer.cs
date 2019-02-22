@@ -350,10 +350,13 @@
             this.AutoUpdateGroupBox.TabIndex = 3;
             this.AutoUpdateGroupBox.TabStop = false;
             this.AutoUpdateGroupBox.Text = "Auto-Updates";
-            // 
-            // LocalVersionPreLabel
-            // 
-            this.LocalVersionPreLabel.AutoSize = true;
+#if (ONI)
+			this.AutoUpdateGroupBox.Enabled = false;
+#endif
+			// 
+			// LocalVersionPreLabel
+			// 
+			this.LocalVersionPreLabel.AutoSize = true;
             this.LocalVersionPreLabel.Location = new System.Drawing.Point(9, 18);
             this.LocalVersionPreLabel.Name = "LocalVersionPreLabel";
             this.LocalVersionPreLabel.Size = new System.Drawing.Size(73, 13);
@@ -591,7 +594,7 @@
 
         }
 
-        #endregion
+#endregion
 
         private System.Windows.Forms.GroupBox RepositoryGroupBox;
         private System.Windows.Forms.ListBox ReposListBox;

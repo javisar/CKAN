@@ -221,7 +221,6 @@
     <Compile Include="RenameInstanceDialog.Designer.cs">
       <DependentUpon>RenameInstanceDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Settings.cs" />
     <Compile Include="SettingsDialog.cs">
       <SubType>Form</SubType>
     </Compile>

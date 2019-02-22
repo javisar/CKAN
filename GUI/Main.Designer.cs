@@ -192,14 +192,14 @@
             // 
             this.selectKSPInstallMenuItem.Name = "selectKSPInstallMenuItem";
             this.selectKSPInstallMenuItem.Size = new System.Drawing.Size(281, 30);
-            this.selectKSPInstallMenuItem.Text = "Select KSP Install...";
+            this.selectKSPInstallMenuItem.Text = "Select "+ GameConfig.Constants.GameNameShort+" Install...";
             this.selectKSPInstallMenuItem.Click += new System.EventHandler(this.selectKSPInstallMenuItem_Click);
             // 
             // openKspDirectoryToolStripMenuItem
             // 
             this.openKspDirectoryToolStripMenuItem.Name = "openKspDirectoryToolStripMenuItem";
             this.openKspDirectoryToolStripMenuItem.Size = new System.Drawing.Size(281, 30);
-            this.openKspDirectoryToolStripMenuItem.Text = "Open KSP Directory";
+            this.openKspDirectoryToolStripMenuItem.Text = "Open "+ GameConfig.Constants.GameNameShort+" Directory";
             this.openKspDirectoryToolStripMenuItem.Click += new System.EventHandler(this.openKspDirectoryToolStripMenuItem_Click);
             //
             // toolStripSeparator1
@@ -290,14 +290,14 @@
             // 
             this.kSPCommandlineToolStripMenuItem.Name = "kSPCommandlineToolStripMenuItem";
             this.kSPCommandlineToolStripMenuItem.Size = new System.Drawing.Size(247, 30);
-            this.kSPCommandlineToolStripMenuItem.Text = "KSP command-line";
+            this.kSPCommandlineToolStripMenuItem.Text = GameConfig.Constants.GameNameShort+" command-line";
             this.kSPCommandlineToolStripMenuItem.Click += new System.EventHandler(this.KSPCommandlineToolStripMenuItem_Click);
             // 
             // compatibleKSPVersionsToolStripMenuItem
             // 
             this.compatibleKSPVersionsToolStripMenuItem.Name = "compatibleKSPVersionsToolStripMenuItem";
             this.compatibleKSPVersionsToolStripMenuItem.Size = new System.Drawing.Size(233, 24);
-            this.compatibleKSPVersionsToolStripMenuItem.Text = "Compatible KSP versions";
+            this.compatibleKSPVersionsToolStripMenuItem.Text = "Compatible "+ GameConfig.Constants.GameNameShort+" versions";
             this.compatibleKSPVersionsToolStripMenuItem.Click += new System.EventHandler(this.CompatibleKspVersionsToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
@@ -1217,14 +1217,14 @@
             //
             this.openKSPToolStripMenuItem.Name = "launchKSPToolStripMenuItem";
             this.openKSPToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.openKSPToolStripMenuItem.Text = "Launch KSP";
+            this.openKSPToolStripMenuItem.Text = "Launch "+ GameConfig.Constants.GameNameShort;
             this.openKSPToolStripMenuItem.Click += new System.EventHandler(this.launchKSPToolStripMenuItem_Click);
             //
             // openKSPDirectoryToolStripMenuItem1
             // 
             this.openKSPDirectoryToolStripMenuItem1.Name = "openKSPDirectoryToolStripMenuItem1";
             this.openKSPDirectoryToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
-            this.openKSPDirectoryToolStripMenuItem1.Text = "Open KSP Directory";
+            this.openKSPDirectoryToolStripMenuItem1.Text = "Open "+ GameConfig.Constants.GameNameShort+" Directory";
             this.openKSPDirectoryToolStripMenuItem1.Click += new System.EventHandler(this.openKspDirectoryToolStripMenuItem_Click);
             // 
             // cKANSettingsToolStripMenuItem1

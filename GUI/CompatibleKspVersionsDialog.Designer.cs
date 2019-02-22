@@ -223,7 +223,7 @@
             this.MinimizeBox = false;
             this.Name = "CompatibleKspVersionsDialog";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Compatible KSP Versions";
+            this.Text = "Compatible " + GameConfig.Constants.GameNameShort+" Versions";
             this.Shown += new System.EventHandler(this.CompatibleKspVersionsDialog_Shown);
             this.ResumeLayout(false);
             this.PerformLayout();

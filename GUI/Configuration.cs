@@ -88,10 +88,10 @@ namespace CKAN
                 var configuration = new Configuration
                 {
                     path = path,
-                    CommandLineArguments = Platform.IsUnix ? "./KSP.x86_64 -single-instance" :
-                            Platform.IsMac  ? "./KSP.app/Contents/MacOS/KSP" :
-                            "KSP_x64.exe -single-instance"
-                };
+                    CommandLineArguments = Platform.IsUnix ? GameConfig.Constants.GameCommandLineUnix :
+                            Platform.IsMac  ? GameConfig.Constants.GameCommandLineMac :
+							GameConfig.Constants.GameCommandLineWindows
+				};
 
                 SaveConfiguration(configuration);
             }

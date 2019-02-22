@@ -60,7 +60,7 @@
             // 
             // CompatibleKSPVersion
             // 
-            this.CompatibleKSPVersion.Text = "Compatible KSP Versions";
+            this.CompatibleKSPVersion.Text = "Compatible " + GameConfig.Constants.GameNameShort + " Versions";
             this.CompatibleKSPVersion.Width = 248;
             // 
             // VersionsListView

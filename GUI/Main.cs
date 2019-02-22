@@ -332,7 +332,7 @@ namespace CKAN
             Location = configuration.WindowLoc;
             Size = configuration.WindowSize;
             WindowState = configuration.IsWindowMaximised ? FormWindowState.Maximized : FormWindowState.Normal;
-
+#if (!ONI)
             if (!configuration.CheckForUpdatesOnLaunchNoNag && AutoUpdate.CanUpdate)
             {
                 log.Debug("Asking user if they wish for auto-updates");
@@ -342,8 +342,12 @@ namespace CKAN
                 configuration.CheckForUpdatesOnLaunchNoNag = true;
                 configuration.Save();
             }
-
-            bool autoUpdating = false;
+#else
+			configuration.CheckForUpdatesOnLaunch = false;
+			configuration.CheckForUpdatesOnLaunchNoNag = false;
+			configuration.Save();
+#endif
+			bool autoUpdating = false;
 
             if (configuration.CheckForUpdatesOnLaunch && AutoUpdate.CanUpdate)
             {
@@ -1189,7 +1193,7 @@ namespace CKAN
             UpdateTrayState();
         }
 
-        #region Navigation History
+#region Navigation History
 
         private void NavInit()
         {
@@ -1247,6 +1251,6 @@ namespace CKAN
             NavGoForward();
         }
 
-        #endregion
+#endregion
     }
 }

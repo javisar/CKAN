@@ -18,6 +18,9 @@ namespace CKAN.GameConfig
 		public static string[] FoldersToCheck = { "Ships/VAB", "Ships/SPH", "Ships/@thumbs/VAB", "Ships/@thumbs/SPH" };
 		public static string ModsDir = "GameData";
 		public static string GameFileFilter = "Build metadata file (buildID*.txt)|buildID*.txt";
+		public static string GameCommandLineUnix = "./KSP.x86_64 -single-instance";
+		public static string GameCommandLineMac = "./KSP.app/Contents/MacOS/KSP";
+		public static string GameCommandLineWindows = "KSP_x64.exe -single-instance";
 #else
 		public static string GameNameShort = "ONI";
 		public static string BuildMapUri = "https://raw.githubusercontent.com/javisar/CKAN/master/CKAN-meta/archive/builds.json";
@@ -27,6 +30,9 @@ namespace CKAN.GameConfig
 		public static string[] FoldersToCheck = {  };
 		public static string ModsDir = "Mods";
 		public static string GameFileFilter = "ONI executable file (OxygenNotIncluded.exe)|OxygenNotIncluded.exe";
+		public static string GameCommandLineUnix = "./OxygenNotIncluded.exe";
+		public static string GameCommandLineMac = "./ONI.app/Contents/MacOS/ONI";
+		public static string GameCommandLineWindows = "OxygenNotIncluded.exe";
 #endif
 
 	}
