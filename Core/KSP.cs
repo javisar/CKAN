@@ -293,7 +293,7 @@ namespace CKAN
                 throw new NotKSPDirKraken(gameDir, "Could not find KSP version in buildID.txt or readme.txt");
             }
             return KSPPathUtils.NormalizePath(
-                Path.Combine(GameDir(), "CKAN")
+                Path.Combine(GameDir(), GameConfig.Constants.CKANFolder)
             );
         }
 

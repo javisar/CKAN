@@ -261,7 +261,7 @@ namespace CKAN
             // Set the window name and class for X11
             if (Platform.IsX11)
             {
-                HandleCreated += (sender, e) => X11.SetWMClass("CKAN", "CKAN", Handle);
+                HandleCreated += (sender, e) => X11.SetWMClass(GameConfig.Constants.CKANFolder, GameConfig.Constants.CKANFolder, Handle);
             }
 
             Application.Run(this);
@@ -404,8 +404,9 @@ namespace CKAN
             installWorker.RunWorkerCompleted += PostInstallMods;
             installWorker.DoWork += InstallMods;
 
+#if (!ONI)
             URLHandlers.RegisterURLHandler(configuration, currentUser);
-
+#endif
             ApplyToolButton.Enabled = false;
 
             CurrentInstanceUpdated();
@@ -923,8 +924,8 @@ namespace CKAN
         {
             var exportOptions = new List<ExportOption>
             {
-                new ExportOption(ExportFileType.CkanFavourite, "CKAN favourites list (*.ckan)", "ckan"),
-                new ExportOption(ExportFileType.Ckan, "CKAN modpack (enforces exact mod versions) (*.ckan)", "ckan"),
+                new ExportOption(ExportFileType.CkanFavourite, GameConfig.Constants.CKANFolder+" favourites list (*.ckan)", "ckan"),
+                new ExportOption(ExportFileType.Ckan, GameConfig.Constants.CKANFolder+" modpack (enforces exact mod versions) (*.ckan)", "ckan"),
                 new ExportOption(ExportFileType.PlainText, "Plain text (*.txt)", "txt"),
                 new ExportOption(ExportFileType.Markdown, "Markdown (*.md)", "md"),
                 new ExportOption(ExportFileType.BbCode, "BBCode (*.txt)", "txt"),

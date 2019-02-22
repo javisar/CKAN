@@ -110,7 +110,7 @@
             this.AddNewButton.Name = "AddNewButton";
             this.AddNewButton.Size = new System.Drawing.Size(126, 23);
             this.AddNewButton.TabIndex = 2;
-            this.AddNewButton.Text = "New KSP instance";
+            this.AddNewButton.Text = "New "+GameConfig.Constants.GameNameShort+" instance";
             this.AddNewButton.UseVisualStyleBackColor = true;
             // 
             // AddNewMenu

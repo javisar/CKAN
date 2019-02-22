@@ -77,7 +77,7 @@ namespace CKAN.ConsoleUI {
         private static ConsoleColor hiliteFg    = ConsoleColor.White;
         private static ConsoleColor linkFg      = ConsoleColor.Cyan;
 
-        private static FancyLinePiece ckanPiece = new FancyLinePiece("CKAN", innerBg, hiliteFg);
+        private static FancyLinePiece ckanPiece = new FancyLinePiece(GameConfig.Constants.CKANFolder, innerBg, hiliteFg);
 
         private static FancyLinePiece[][] lines = new FancyLinePiece[][] {
             new FancyLinePiece[] {

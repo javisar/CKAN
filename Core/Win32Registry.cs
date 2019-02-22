@@ -20,7 +20,7 @@ namespace CKAN
 
     public class Win32Registry : IWin32Registry
     {
-        private const           string CKAN_KEY           = @"HKEY_CURRENT_USER\Software\CKAN";
+        private const           string CKAN_KEY           = @"HKEY_CURRENT_USER\Software\"+GameConfig.Constants.CKANFolder;
         private static readonly string CKAN_KEY_NO_PREFIX = StripPrefixKey(CKAN_KEY);
 
         private const           string authTokenKey         = CKAN_KEY + @"\AuthTokens";
@@ -33,7 +33,7 @@ namespace CKAN
 
         private static readonly string defaultDownloadCacheDir = Path.Combine(
             Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-            "CKAN",
+            GameConfig.Constants.CKANFolder,
             "downloads"
         );
 

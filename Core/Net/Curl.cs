@@ -114,7 +114,7 @@ namespace CKAN
         private static string ResolveCurlCaBundle()
         {
             const string caBundleFileName = "curl-ca-bundle.crt";
-            const string ckanSubDirectoryName = "CKAN";
+            const string ckanSubDirectoryName = GameConfig.Constants.CKANFolder;
 
             var bundle = new[]
             {

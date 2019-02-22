@@ -860,6 +860,7 @@ namespace CKAN
 
             // http://xkcd.com/208/
             // This regex works great for things like GameData/Foo/Foo-1.2.dll
+#if (!ONI)
             Match match = Regex.Match(
                 relative_path, @"
                     ^GameData/            # DLLs only live in GameData
@@ -869,6 +870,17 @@ namespace CKAN
                 ",
                 RegexOptions.IgnoreCase | RegexOptions.IgnorePatternWhitespace
             );
+#else
+            Match match = Regex.Match(
+                relative_path, @""+
+                    @"^"+GameConfig.Constants.ModsDir+@"/            # DLLs only live in GameData
+                    (?:.*/)?              # Intermediate paths (ending with /)
+                    (?<modname>[^.]+)     # Our DLL name, up until the first dot.
+                    .*\.dll$              # Everything else, ending in dll
+                ",
+                RegexOptions.IgnoreCase | RegexOptions.IgnorePatternWhitespace
+            );
+#endif
 
             string modName = match.Groups["modname"].Value;
 

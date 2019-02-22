@@ -10,6 +10,8 @@ namespace CKAN.GameConfig
     {
 
 #if (!ONI)
+        public const string CKANFolder = "CKAN";
+        public static string GameName = "Kerbal Space Program";
 		public static string GameNameShort = "KSP";
 		public static string BuildMapUri = "https://raw.githubusercontent.com/KSP-CKAN/CKAN-meta/master/builds.json";
         public static string DefaultCKANRepoUri = "https://github.com/KSP-CKAN/CKAN-meta/archive/master.tar.gz";
@@ -22,8 +24,10 @@ namespace CKAN.GameConfig
 		public static string GameCommandLineMac = "./KSP.app/Contents/MacOS/KSP";
 		public static string GameCommandLineWindows = "KSP_x64.exe -single-instance";
 #else
-		public static string GameNameShort = "ONI";
-		public static string BuildMapUri = "https://raw.githubusercontent.com/javisar/CKAN/master/CKAN-meta/archive/builds.json";
+        public const string CKANFolder = "CKAN-ONI";
+        public static string GameName = "Oxygen Not Included";
+        public static string GameNameShort = "ONI";
+        public static string BuildMapUri = "https://raw.githubusercontent.com/javisar/CKAN/master/CKAN-meta/archive/builds.json";
 		public static string DefaultCKANRepoUri = "https://raw.githubusercontent.com/javisar/CKAN/master/CKAN-meta/archive/master.tar.gz";
 		public static string DefaultRepoMasterList = "https://raw.githubusercontent.com/javisar/CKAN/master/CKAN-meta/archive/repositories.json";
 		public static string GameDir = "OxygenNotIncluded_Data";
