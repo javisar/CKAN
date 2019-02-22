@@ -25,6 +25,7 @@ namespace Tests.Core
         [TearDown]
         public void TearDown()
         {
+            manager.Dispose();
             tidy.Dispose();
         }
 
@@ -122,7 +123,7 @@ namespace Tests.Core
                 manager.CloneInstance(badKSP, badName, tempdir));
             Assert.IsFalse(manager.HasInstance(badName));
 
-            // Tidy up                        
+            // Tidy up
             System.IO.Directory.Delete(tempdir, true);
         }
 
@@ -135,7 +136,7 @@ namespace Tests.Core
                 string tempdir = TestData.NewTempDir();
                 System.IO.File.Create(System.IO.Path.Combine(tempdir, "shouldntbehere.txt"));
 
-                Assert.Throws<System.IO.IOException>(() =>
+                Assert.Throws<PathErrorKraken>(() =>
                     manager.CloneInstance(KSP.KSP, instanceName, tempdir));
                 Assert.IsFalse(manager.HasInstance(instanceName));
 

@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## v1.25.5
+## v1.26.0
 
 ### Features
 
@@ -15,6 +15,11 @@ All notable changes to this project will be documented in this file.
 - [Multiple] Show progress bar while loading registry (#2617 by: HebaruSan; reviewed: politas)
 - [Multiple] Add possibility to clone KSP installs and create dummy ones (#2627 by: DasSkelett; reviewed: HebaruSan, politas)
 - [ConsoleUI] Allow overriding menu tip in ConsoleUI (#2635 by: HebaruSan; reviewed: DasSkelett, politas)
+- [Netkan] Get license from GitHub (#2663 by: HebaruSan; reviewed: politas)
+- [Multiple] Cleanly switch versions of installed mod (#2669 by: HebaruSan; reviewed: politas)
+- [Multiple] Implementation of clone and fake in GUI (#2665 by: DasSkelett; reviewed: HebaruSan, politas)
+- [Multiple] Support depends on any_of lists (#2660 by: HebaruSan; reviewed: politas)
+- [Build] Use Core.Utilities.CopyDirectory in tests (#2670 by: DasSkelett; reviewed: HebaruSan)
 
 ### Bugfixes
 
@@ -44,6 +49,12 @@ All notable changes to this project will be documented in this file.
 - [GUI] Set focus to mod list after loading (#2657 by: HebaruSan; reviewed: politas)
 - [GUI] Small text/number formatting changes to mod list (#2658 by: DasSkelett; reviewed: politas)
 - [Multiple] Remove ConfirmPrompt from IUser (#2659 by: HebaruSan; reviewed: politas)
+- [ConsoleUI] Handle manually installed mods in ConsoleUI (#2666 by: HebaruSan; reviewed: politas)
+- [GUI] Add AD mods back into GUI's installed filter (#2668 by: HebaruSan; reviewed: politas)
+- [GUI] Allow installation of missing dependencies in GUI (#2674 by: HebaruSan; reviewed: politas)
+- [GUI] Fix window position on MacOSX (#2677 by: HebaruSan; reviewed: politas)
+- [GUI] Fix upgrading and installing from .ckan in GUI (#2680 by: HebaruSan; reviewed: politas)
+- [GUI] Fix RefreshPreLabel overlapping RefreshTextBox in Settings (#2686 by: DasSkelett; reviewed: HebaruSan)
 
 ## v1.25.4 Kennedy
 
@@ -519,7 +530,7 @@ All notable changes to this project will be documented in this file.
 
 ### Features
 
-- [GUI] The CKAN Identifer for each mod is now shown in their metadata panel. (plague006, #1476)
+- [GUI] The CKAN Identifier for each mod is now shown in their metadata panel. (plague006, #1476)
 - [GUI] Double-clicking on a filename in the 'Contents' panel now opens the directory containing that file. (Postremus, #1443)
 - [GUI] The progress bar now shows the progress of downloading to the cache. (Postremus, #1445)
 - [GUI] Mods can now be searched by their CKAN identifier in the name textbox (Postremus, #1475)

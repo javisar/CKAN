@@ -535,14 +535,14 @@ namespace CKAN
                     try
                     {
                         if (!dependency.MatchesAny(null, InstalledDlls.ToHashSet(), InstalledDlc)
-                            && !LatestAvailableWithProvides(dependency.name, ksp_version).Any())
+                            && !dependency.LatestAvailableWithProvides(this, ksp_version).Any())
                         {
                             return false;
                         }
                     }
                     catch (KeyNotFoundException e)
                     {
-                        log.ErrorFormat("Cannot find available version with provides for {0} in registry", dependency.name);
+                        log.ErrorFormat("Cannot find available version with provides for {0} in registry", dependency.ToString());
                         throw e;
                     }
                     catch (ModuleNotFoundKraken)
@@ -563,7 +563,7 @@ namespace CKAN
         public CkanModule LatestAvailable(
             string module,
             KspVersionCriteria ksp_version,
-            RelationshipDescriptor relationship_descriptor =null)
+            RelationshipDescriptor relationship_descriptor = null)
         {
             log.DebugFormat("Finding latest available for {0}", module);
 
@@ -633,24 +633,29 @@ namespace CKAN
         /// <param name="minKsp">Return parameter for the lowest  game version</param>
         /// <param name="maxKsp">Return parameter for the highest game version</param>
         public static void GetMinMaxVersions(IEnumerable<CkanModule> modVersions,
-                out ModuleVersion    minMod, out ModuleVersion    maxMod,
-                out KspVersion minKsp, out KspVersion maxKsp)
+                out ModuleVersion minMod, out ModuleVersion maxMod,
+                out KspVersion    minKsp, out KspVersion    maxKsp)
         {
             minMod = maxMod = null;
             minKsp = maxKsp = null;
-            foreach (CkanModule rel in modVersions) {
-                if (minMod == null || minMod > rel.version) {
+            foreach (CkanModule rel in modVersions.Where(v => v != null))
+            {
+                if (minMod == null || minMod > rel.version)
+                {
                     minMod = rel.version;
                 }
-                if (maxMod == null || maxMod < rel.version) {
+                if (maxMod == null || maxMod < rel.version)
+                {
                     maxMod = rel.version;
                 }
                 KspVersion relMin = rel.EarliestCompatibleKSP();
                 KspVersion relMax = rel.LatestCompatibleKSP();
-                if (minKsp == null || !minKsp.IsAny && (minKsp > relMin || relMin.IsAny)) {
+                if (minKsp == null || !minKsp.IsAny && (minKsp > relMin || relMin.IsAny))
+                {
                     minKsp = relMin;
                 }
-                if (maxKsp == null || !maxKsp.IsAny && (maxKsp < relMax || relMax.IsAny)) {
+                if (maxKsp == null || !maxKsp.IsAny && (maxKsp < relMax || relMax.IsAny))
+                {
                     maxKsp = relMax;
                 }
             }
@@ -690,15 +695,22 @@ namespace CKAN
         /// <see cref="IRegistryQuerier.LatestAvailableWithProvides" />
         /// </summary>
         public List<CkanModule> LatestAvailableWithProvides(
-            string                 module,
-            KspVersionCriteria     ksp_version,
-            RelationshipDescriptor relationship_descriptor = null)
+            string                  module,
+            KspVersionCriteria      ksp_version,
+            RelationshipDescriptor  relationship_descriptor = null,
+            IEnumerable<CkanModule> toInstall               = null)
         {
             HashSet<AvailableModule> provs;
             if (providers.TryGetValue(module, out provs))
             {
                 // For each AvailableModule, we want the latest one matching our constraints
-                return provs.Select(am => am.Latest(ksp_version, relationship_descriptor))
+                return provs
+                    .Select(am => am.Latest(
+                        ksp_version,
+                        relationship_descriptor,
+                        InstalledModules.Select(im => im.Module),
+                        toInstall
+                    ))
                     .Where(m => m?.ProvidesList?.Contains(module) ?? false)
                     .ToList();
             }
@@ -1010,10 +1022,10 @@ namespace CKAN
         /// <summary>
         /// <see cref = "IRegistryQuerier.GetInstalledVersion" />
         /// </summary>
-        public CkanModule GetInstalledVersion(string mod_identifer)
+        public CkanModule GetInstalledVersion(string mod_identifier)
         {
             InstalledModule installedModule;
-            return installed_modules.TryGetValue(mod_identifer, out installedModule)
+            return installed_modules.TryGetValue(mod_identifier, out installedModule)
                 ? installedModule.Module
                 : null;
         }
@@ -1064,6 +1076,12 @@ namespace CKAN
             IDictionary<string, UnmanagedModuleVersion> dlc
         )
         {
+            if (!modules_to_remove.Any())
+            {
+                // The empty list has no reverse dependencies
+                // (Don't remove broken modules if we're only installing)
+                return new HashSet<string>();
+            }
             while (true)
             {
                 // Make our hypothetical install, and remove the listed modules from it.

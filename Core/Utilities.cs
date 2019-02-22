@@ -40,29 +40,37 @@ namespace CKAN
             }
             else if (Directory.GetDirectories(destDirPath).Length != 0 || Directory.GetFiles(destDirPath).Length != 0)
             {
-                throw new IOException("Directory not empty: " + destDirPath);
+                throw new PathErrorKraken(destDirPath, "Directory not empty: ");
             }
 
             // Get the files in the directory and copy them to the new location.
             FileInfo[] files = sourceDir.GetFiles();
             foreach (FileInfo file in files)
             {
+                if (file.Name == "registry.locked")
+                {
+                    continue;
+                }
+
                 string temppath = Path.Combine(destDirPath, file.Name);
                 file.CopyTo(temppath, false);
             }
 
-            // If copying subdirectories, copy them and their contents to new location.
-            if (copySubDirs)
-            {
-                // Get the subdirectories for the specified directory.
-                DirectoryInfo[] dirs = sourceDir.GetDirectories();
+            // Create all first level subdirectories
+            DirectoryInfo[] dirs = sourceDir.GetDirectories();
 
-                foreach (DirectoryInfo subdir in dirs)
+            foreach (DirectoryInfo subdir in dirs)
+            {
+                string temppath = Path.Combine(destDirPath, subdir.Name);
+                Directory.CreateDirectory(temppath);
+
+                // If copying subdirectories, copy their contents to new location.
+                if (copySubDirs)
                 {
-                    string temppath = Path.Combine(destDirPath, subdir.Name);
                     _CopyDirectory(subdir.FullName, temppath, copySubDirs);
                 }
             }
+
         }
     }
 }

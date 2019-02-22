@@ -129,6 +129,10 @@ namespace CKAN
             IsIncompatible = incompatible;
             IsAutodetected = registry.IsAutodetected(identifier);
             DownloadCount  = registry.DownloadCount(identifier);
+            if (registry.IsAutodetected(identifier))
+            {
+                IsInstalled = true;
+            }
 
             ModuleVersion latest_version = null;
             try
@@ -306,6 +310,11 @@ namespace CKAN
         public override int GetHashCode()
         {
             return Identifier?.GetHashCode() ?? 0;
+        }
+
+        public override string ToString()
+        {
+            return $"{ToModule()}";
         }
 
     }

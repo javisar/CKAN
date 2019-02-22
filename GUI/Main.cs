@@ -195,8 +195,8 @@ namespace CKAN
                 this.minimizedContextMenuStrip.Renderer = new FlatToolStripRenderer();
             }
 
-            // We need to initialize the error dialog first to display errors.
-            errorDialog = controlFactory.CreateControl<ErrorDialog>();
+            // Initialize all user interaction dialogs.
+            RecreateDialogs();
 
             // We want to check if our current instance is null first,
             // as it may have already been set by a command-line option.
@@ -204,7 +204,7 @@ namespace CKAN
             {
                 Hide();
 
-                var result = new ChooseKSPInstance(!actuallyVisible).ShowDialog();
+                var result = new ManageKspInstances(!actuallyVisible).ShowDialog();
                 if (result == DialogResult.Cancel || result == DialogResult.Abort)
                 {
                     Application.Exit();
@@ -240,8 +240,6 @@ namespace CKAN
 
             tabController = new TabController(MainTabControl);
             tabController.ShowTab("ManageModsTabPage");
-
-            RecreateDialogs();
 
             if (!showConsole)
                 Util.HideConsoleWindow();
@@ -329,7 +327,24 @@ namespace CKAN
 
         protected override void OnLoad(EventArgs e)
         {
-            Location = configuration.WindowLoc;
+            if (configuration.WindowLoc.X == -1 && configuration.WindowLoc.Y == -1)
+            {
+                // Center on screen for first launch
+                StartPosition = FormStartPosition.CenterScreen;
+            }
+            else if (Platform.IsMac)
+            {
+                // Make sure there's room at the top for the MacOSX menu bar
+                Location = Util.ClampedLocationWithMargins(
+                    configuration.WindowLoc, configuration.WindowSize,
+                    new Size(0, 30), new Size(0, 0)
+                );
+            }
+            else
+            {
+                // Just make sure it's fully on screen
+                Location = Util.ClampedLocation(configuration.WindowLoc, configuration.WindowSize);
+            }
             Size = configuration.WindowSize;
             WindowState = configuration.IsWindowMaximised ? FormWindowState.Maximized : FormWindowState.Normal;
 #if (!ONI)
@@ -885,11 +900,15 @@ namespace CKAN
                 // We'll need to make some registry changes to do this.
                 RegistryManager registry_manager = RegistryManager.Instance(CurrentInstance);
 
-                // Remove this version of the module in the registry, if it exists.
-                registry_manager.registry.RemoveAvailable(module);
+                // Don't add metapacakges to the registry
+                if (!module.IsMetapackage)
+                {
+                    // Remove this version of the module in the registry, if it exists.
+                    registry_manager.registry.RemoveAvailable(module);
 
-                // Sneakily add our version in...
-                registry_manager.registry.AddAvailable(module);
+                    // Sneakily add our version in...
+                    registry_manager.registry.AddAvailable(module);
+                }
 
                 menuStrip1.Enabled = false;
 
@@ -955,11 +974,11 @@ namespace CKAN
             }
         }
 
-        private void selectKSPInstallMenuItem_Click(object sender, EventArgs e)
+        private void manageKspInstancesMenuItem_Click(object sender, EventArgs e)
         {
             Instance.Manager.ClearAutoStart();
             var old_instance = Instance.CurrentInstance;
-            var result = new ChooseKSPInstance(!actuallyVisible).ShowDialog();
+            var result = new ManageKspInstances(!actuallyVisible).ShowDialog();
             if (result == DialogResult.OK && !Equals(old_instance, Instance.CurrentInstance))
                 Instance.CurrentInstanceUpdated();
         }

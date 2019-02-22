@@ -58,7 +58,12 @@ namespace CKAN
         ///     Returns an empty list if nothing is available for our system, which includes if no such module exists.
         ///     If no KSP version is provided, the latest module for *any* KSP version is given.
         /// </summary>
-        List<CkanModule> LatestAvailableWithProvides(string identifier, KspVersionCriteria ksp_version, RelationshipDescriptor relationship_descriptor = null);
+        List<CkanModule> LatestAvailableWithProvides(
+            string                  identifier,
+            KspVersionCriteria      ksp_version,
+            RelationshipDescriptor  relationship_descriptor = null,
+            IEnumerable<CkanModule> toInstall               = null
+        );
 
         /// <summary>
         ///     Checks the sanity of the registry, to ensure that all dependencies are met,
@@ -77,7 +82,7 @@ namespace CKAN
         /// Gets the installed version of a mod. Does not check for provided or autodetected mods.
         /// </summary>
         /// <returns>The module or null if not found</returns>
-        CkanModule GetInstalledVersion(string identifer);
+        CkanModule GetInstalledVersion(string identifier);
 
         /// <summary>
         /// Attempts to find a module with the given identifier and version.
